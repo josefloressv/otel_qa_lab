@@ -2,7 +2,7 @@ import os
 from pathlib import Path
 
 import db
-from flask import Flask, render_template, request, url_for
+from flask import Flask, render_template, request
 
 
 def secret_config(value):
@@ -23,15 +23,19 @@ dat = db.Datastore(
 )
 
 
+def bound_port(default=5000):
+    try:
+        return int(request.host.split(':')[-1])
+    except:
+        return default
+
+
 @app.route('/')
 def index():
-    path = request.path
-    path = url_for('timeline', path=path)
+    return f'Welcome to Overshare! Yet another social media app.  Click <a href="/proxy/{bound_port}/timeline">here</a> to view the timeline.'
 
-    return f'Welcome to Overshare! Yet another social media app.  Click <a href="{path}">here</a> to view the timeline.'
-
-@app.route('/<path>/timeline')
-def timeline(_):
+@app.route('/timeline')
+def timeline():
     try:
         return render_template('index.html', records=db.get_timeline(dat))
     except:
