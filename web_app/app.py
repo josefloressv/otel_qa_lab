@@ -2,7 +2,7 @@ import os
 from pathlib import Path
 
 import db
-from flask import Flask, render_template
+from flask import Flask, render_template, request, url_for
 
 
 def secret_config(value):
@@ -25,10 +25,13 @@ dat = db.Datastore(
 
 @app.route('/')
 def index():
-    return 'Welcome to Overshare! Yet another social media app.  Click <a href="/timeline">here</a> to view the timeline.'
+    path = request.path
+    path = url_for('timeline', path=path)
 
-@app.route('/timeline')
-def timeline():
+    return f'Welcome to Overshare! Yet another social media app.  Click <a href="{path}">here</a> to view the timeline.'
+
+@app.route('/<path>/timeline')
+def timeline(_):
     try:
         return render_template('index.html', records=db.get_timeline(dat))
     except:
