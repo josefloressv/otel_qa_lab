@@ -24,5 +24,6 @@ app = Flask(__name__)
 
 @app.route('/inform')
 def inform():
-    db.delay(dat)
+    # Add time delay to simulate db write
+    # db.delay(dat)
     return 'success', 200

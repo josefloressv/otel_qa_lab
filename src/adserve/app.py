@@ -18,9 +18,10 @@ prov.host = os.getenv('PROVIDER_HOST')
 prov.port = os.getenv('PROVIDER_PORT')
 prov.path = os.getenv('PROVIDER_PATH')
 
-@app.before_request
-def before_request():
-    sleep(randint(1, 5))
+# Generate time delay before each request
+# @app.before_request
+# def before_request():
+#     sleep(randint(1, 5))
 
 @app.route('/serve')
 def user():
