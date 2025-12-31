@@ -70,7 +70,7 @@ services:
             - ADSERVE_HOST=adserve
             - ADSERVE_PORT=9000
             - ADSERVE_PATH=/serve
-            - SIGNOZ_HOST
+            - SIGNOZ_HOST=host.docker.internal
             - SERVICE_NAME=overshare
         depends_on: 
             postgres:
@@ -90,7 +90,7 @@ services:
             - DATABASE_USER=web_app
             - DATABASE_PASS=74jrjdSj
             - DATABASE_NAME=postgres
-            - SIGNOZ_HOST
+            - SIGNOZ_HOST=host.docker.internal
             - SERVICE_NAME=adprovider
         depends_on: 
             postgres:
@@ -107,7 +107,7 @@ services:
             - ad_to_provider
         environment:
             - SERVICE_NAME=adserve
-            - SIGNOZ_HOST
+            - SIGNOZ_HOST=host.docker.internal
             - PROVIDER_HOST=adprovider
             - PROVIDER_PORT=9000
             - PROVIDER_PATH=/inform
@@ -121,4 +121,4 @@ services:
             - web_app
         environment:
             - SERVICE_NAME=simulate
-            - SIGNOZ_HOST
+            - SIGNOZ_HOST=host.docker.internal
